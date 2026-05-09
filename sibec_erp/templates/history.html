@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Historique</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<img src="/static/sibec.png" class="logo">
+
+<div class="container">
+
+<h1>Historique</h1>
+
+<table>
+
+<tr>
+    <th>Référence</th>
+    <th>Quantité</th>
+    <th>Type</th>
+    <th>Date</th>
+</tr>
+
+{% for r,q,t,d in mov %}
+<tr>
+    <td>{{r}}</td>
+    <td>{{q}}</td>
+    <td>{{t}}</td>
+    <td>{{d}}</td>
+</tr>
+{% endfor %}
+
+{% for r,q,t,d in prod %}
+<tr>
+    <td>{{r}}</td>
+    <td>{{q}}</td>
+    <td>{{t}}</td>
+    <td>{{d}}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/">
+    <button>Retour</button>
+</a>
+
+</div>
+
+</body>
+</html>
