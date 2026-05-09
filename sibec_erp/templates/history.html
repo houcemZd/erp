@@ -1,55 +1,61 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Historique</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-
-<body>
-
-<img src="/static/sibec.png" class="logo">
-
-<div class="container">
-
+{% extends "base.html" %}
+{% block title %}Historique - SIBEC ERP{% endblock %}
+{% block content %}
 <h1>Historique</h1>
 
+<h2>Mouvements</h2>
 <table>
-
-<tr>
+  <tr>
     <th>Référence</th>
     <th>Quantité</th>
     <th>Type</th>
+    <th>Utilisateur</th>
     <th>Date</th>
-</tr>
-
-{% for r,q,t,d in mov %}
-<tr>
-    <td>{{r}}</td>
-    <td>{{q}}</td>
-    <td>{{t}}</td>
-    <td>{{d}}</td>
-</tr>
-{% endfor %}
-
-{% for r,q,t,d in prod %}
-<tr>
-    <td>{{r}}</td>
-    <td>{{q}}</td>
-    <td>{{t}}</td>
-    <td>{{d}}</td>
-</tr>
-{% endfor %}
-
+  </tr>
+  {% for m in mov %}
+  <tr>
+    <td>{{ m.ref }}</td>
+    <td>{{ m.qty }}</td>
+    <td>{{ m.type }}</td>
+    <td>{{ m.actor.username if m.actor else 'Non renseigné' }}</td>
+    <td>{{ m.date }}</td>
+  </tr>
+  {% endfor %}
 </table>
 
-<br>
+<h2>Productions</h2>
+<table>
+  <tr>
+    <th>Référence</th>
+    <th>Quantité</th>
+    <th>Utilisateur</th>
+    <th>Date</th>
+  </tr>
+  {% for p in prod %}
+  <tr>
+    <td>{{ p.ref }}</td>
+    <td>{{ p.qty }}</td>
+    <td>{{ p.actor.username if p.actor else 'Non renseigné' }}</td>
+    <td>{{ p.date }}</td>
+  </tr>
+  {% endfor %}
+</table>
 
-<a href="/">
-    <button>Retour</button>
-</a>
-
-</div>
-
-</body>
-</html>
+<h2>Journal d'audit</h2>
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Détails</th>
+    <th>Utilisateur</th>
+    <th>Date</th>
+  </tr>
+  {% for a in audits %}
+  <tr>
+    <td>{{ a.action }}</td>
+    <td>{{ a.details }}</td>
+    <td>{{ a.actor.username if a.actor else 'Non renseigné' }}</td>
+    <td>{{ a.created_at }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Admin Utilisateurs - SIBEC ERP{% endblock %}
+{% block content %}
+<h1>Administration des utilisateurs</h1>
+
+<form method="POST" class="card">
+  <label for="admin-username">Nom d'utilisateur</label>
+  <input id="admin-username" type="text" name="username" placeholder="Nom d'utilisateur" required maxlength="80">
+  <label for="admin-password">Mot de passe (min 8)</label>
+  <input id="admin-password" type="password" name="password" placeholder="Mot de passe (min 8)" required>
+  <label for="admin-role">Rôle</label>
+  <select id="admin-role" name="role">
+    <option value="user">user</option>
+    <option value="admin">admin</option>
+  </select>
+  <button type="submit">Créer utilisateur</button>
+</form>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Username</th>
+    <th>Rôle</th>
+    <th>Actif</th>
+    <th>Action</th>
+  </tr>
+  {% for u in users %}
+  <tr>
+    <td>{{ u.id }}</td>
+    <td>{{ u.username }}</td>
+    <td>{{ u.role }}</td>
+    <td>{{ 'Oui' if u.is_active_user else 'Non' }}</td>
+    <td>
+      {% if u.id != current_user.id %}
+      <form method="POST" action="/admin/users/{{ u.id }}/toggle">
+        <button type="submit">Basculer actif</button>
+      </form>
+      {% else %}
+      -
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

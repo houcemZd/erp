@@ -1,35 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="/static/style.css">
-</head>
-
-<body>
-
-<img src="/static/sibec.png" class="logo">
-
-<div class="container">
-
+{% extends "base.html" %}
+{% block title %}Stock - SIBEC ERP{% endblock %}
+{% block content %}
 <h1>Stock</h1>
-
 <table>
-<tr>
-<th>Référence</th>
-<th>Quantité</th>
-</tr>
-
-{% for r,q in data %}
-<tr>
-<td>{{r}}</td>
-<td>{{q}}</td>
-</tr>
-{% endfor %}
-
+  <caption>Liste des articles en stock</caption>
+  <tr>
+    <th>Référence</th>
+    <th>Quantité</th>
+  </tr>
+  {% for item in data %}
+  <tr>
+    <td>{{ item.ref }}</td>
+    <td>{{ item.qty }}</td>
+  </tr>
+  {% endfor %}
 </table>
-
-<a href="/"><button>Retour</button></a>
-
-</div>
-
-</body>
-</html>
+{% endblock %}

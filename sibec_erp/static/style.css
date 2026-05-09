@@ -1,60 +1,125 @@
-body{
-    font-family: Arial;
-    background:#e6e6e6;
-    margin:0;
-    padding:0;
-    text-align:center;
+body {
+    font-family: Arial, sans-serif;
+    background: #e6e6e6;
+    margin: 0;
+    padding: 0;
 }
 
-.container{
-    width:90%;
-    margin:auto;
-    margin-top:30px;
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: #1f6feb;
 }
 
-h1{
-    color:#000;
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.15);
 }
 
-button{
-    background:#1f6feb;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    margin:5px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:15px;
+.nav a:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
-button:hover{
-    background:#144fb5;
+.user-badge {
+    color: white;
+    margin-left: auto;
+    margin-right: 8px;
 }
 
-input{
-    width:300px;
-    padding:10px;
-    margin:10px;
-    border-radius:5px;
-    border:1px solid #ccc;
+.container {
+    width: min(1100px, 95%);
+    margin: 20px auto;
+    text-align: center;
 }
 
-table{
-    width:100%;
-    background:white;
-    border-collapse:collapse;
+h1 {
+    color: #111;
 }
 
-th,td{
-    padding:10px;
-    border:1px solid #ccc;
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px auto;
+    width: min(480px, 95%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.logo{
-    width:500px;
-    opacity:2;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+button {
+    background: #1f6feb;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #144fb5;
+}
+
+input,
+select {
+    width: 90%;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 6px;
+    border: 1px solid #c9c9c9;
+}
+
+table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+}
+
+th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.logo {
+    width: min(500px, 90%);
+    display: block;
+    margin: 0 auto 20px;
+    opacity: 0.6;
+}
+
+caption {
+    caption-side: top;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.flash {
+    width: min(700px, 95%);
+    margin: 8px auto;
+    border-radius: 8px;
+    padding: 10px;
+    color: #111;
+}
+
+.flash.error {
+    background: #ffdede;
+    border: 1px solid #ff9f9f;
+}
+
+.flash.success {
+    background: #ddffe5;
+    border: 1px solid #9fefb0;
+}
+
+.hint {
+    color: #444;
 }

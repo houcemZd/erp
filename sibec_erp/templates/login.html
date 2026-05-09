@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Connexion - SIBEC ERP{% endblock %}
+{% block content %}
+<h1>Connexion</h1>
+<form method="POST" class="card">
+  <label for="username">Nom d'utilisateur</label>
+  <input id="username" type="text" name="username" placeholder="Nom d'utilisateur" required maxlength="80">
+  <label for="password">Mot de passe</label>
+  <input id="password" type="password" name="password" placeholder="Mot de passe" required>
+  <button type="submit">Se connecter</button>
+</form>
+<p class="hint">Demandez un compte à l'administrateur.</p>
+{% endblock %}
