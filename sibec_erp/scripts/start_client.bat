@@ -1,3 +1,3 @@
 @echo off
 cd /d %~dp0\..
-python client.py
+py -3 client.py

@@ -88,6 +88,7 @@ Exemple d'URL:
 Lancement prêt à cliquer:
 
 - Windows: double-cliquer `sibec_erp\scripts\start_client.bat`
+- Windows: double-cliquer `sibec_erp/scripts/start_client.bat`
 - Linux/macOS: exécuter `sibec_erp/scripts/start_client.sh` (ou le rendre exécutable puis double-cliquer selon l'environnement)
 
 Pour reconstruire l'EXE:
