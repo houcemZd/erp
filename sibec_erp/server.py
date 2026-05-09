@@ -9,7 +9,10 @@ from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
+from dotenv import load_dotenv
 from werkzeug.security import check_password_hash, generate_password_hash
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -140,22 +143,20 @@ def validate_qty(raw: str) -> int:
 
 
 def write_audit(action: str, details: str, actor_id: int | None = None) -> None:
+    """Add an audit entry to current DB session; caller commits transaction."""
     db.session.add(AuditLog(action=action, details=details, actor_id=actor_id))
 
 
 def bootstrap_admin() -> None:
     admin_username = os.getenv("ADMIN_USERNAME", "admin")
-    admin_password = os.getenv("ADMIN_PASSWORD")
-
-    if not admin_password:
-        debug_mode = os.getenv("FLASK_DEBUG", "false").lower() in {"1", "true", "yes"}
-        if not debug_mode:
-            raise RuntimeError("ADMIN_PASSWORD must be set in production.")
-        admin_password = token_hex(8)
 
     existing = User.query.filter_by(username=admin_username).first()
     if existing:
         return
+
+    admin_password = os.getenv("ADMIN_PASSWORD")
+    if not admin_password:
+        raise RuntimeError("ADMIN_PASSWORD must be set to bootstrap the initial admin user.")
 
     admin = User(username=admin_username, role="admin")
     admin.set_password(admin_password)

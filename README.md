@@ -15,7 +15,7 @@ Cette version permet une architecture **serveur central + clients multi-PC**:
 Installer dépendances:
 
 ```bash
-cd /home/runner/work/erp/erp/sibec_erp
+cd <project_root>/sibec_erp
 pip install -r requirements.txt
 ```
 
@@ -24,7 +24,7 @@ pip install -r requirements.txt
 Créer un fichier `.env` depuis l'exemple:
 
 ```bash
-cd /home/runner/work/erp/erp/sibec_erp
+cd <project_root>/sibec_erp
 cp .env.example .env
 ```
 
@@ -47,7 +47,7 @@ FLASK_DEBUG=false
 ## 3) Migration base de données
 
 ```bash
-cd /home/runner/work/erp/erp/sibec_erp
+cd <project_root>/sibec_erp
 python migrate.py
 ```
 
@@ -56,7 +56,7 @@ python migrate.py
 Linux:
 
 ```bash
-cd /home/runner/work/erp/erp/sibec_erp
+cd <project_root>/sibec_erp
 ./scripts/start_server.sh
 ```
 
@@ -88,7 +88,7 @@ Exemple d'URL:
 Pour reconstruire l'EXE:
 
 ```bash
-cd /home/runner/work/erp/erp/sibec_erp
+cd <project_root>/sibec_erp
 pyinstaller client.spec
 ```
 
@@ -105,7 +105,7 @@ pyinstaller client.spec
 Backup PostgreSQL:
 
 ```bash
-cd /home/runner/work/erp/erp/sibec_erp
+cd <project_root>/sibec_erp
 export DATABASE_URL='postgresql://...'
 ./scripts/backup_postgres.sh
 ```
@@ -113,7 +113,7 @@ export DATABASE_URL='postgresql://...'
 Restore PostgreSQL:
 
 ```bash
-cd /home/runner/work/erp/erp/sibec_erp
+cd <project_root>/sibec_erp
 export DATABASE_URL='postgresql://...'
 ./scripts/restore_postgres.sh backup_YYYYMMDD_HHMMSS.sql
 ```
@@ -121,7 +121,7 @@ export DATABASE_URL='postgresql://...'
 Healthcheck:
 
 ```bash
-cd /home/runner/work/erp/erp/sibec_erp
+cd <project_root>/sibec_erp
 ./scripts/healthcheck.sh http://127.0.0.1:5000/healthz
 ```
 
