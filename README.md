@@ -85,6 +85,11 @@ Exemple d'URL:
 
 - `http://192.168.1.10:5000`
 
+Lancement prêt à cliquer:
+
+- Windows: double-cliquer `sibec_erp\scripts\start_client.bat`
+- Linux/macOS: exécuter `sibec_erp/scripts/start_client.sh` (ou le rendre exécutable puis double-cliquer selon l'environnement)
+
 Pour reconstruire l'EXE:
 
 ```bash
