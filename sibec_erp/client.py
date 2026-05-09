@@ -60,7 +60,10 @@ def open_erp() -> None:
     server_url = url_var.get().strip()
     parsed = urlparse(server_url)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
-        messagebox.showerror("URL invalide", "URL invalide. Exemple: http://192.168.1.10:5000")
+        messagebox.showerror(
+            "URL invalide",
+            "L'URL doit commencer par http:// ou https:// et contenir une adresse valide. Exemple: http://192.168.1.10:5000",
+        )
         return
     webbrowser.open(server_url)
 

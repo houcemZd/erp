@@ -18,13 +18,16 @@ app = Flask(__name__)
 CORS(app)
 
 
+def is_debug_mode() -> bool:
+    return os.getenv("FLASK_DEBUG", "false").lower() in {"1", "true", "yes"}
+
+
 def get_secret_key() -> str:
     configured = os.getenv("SECRET_KEY")
     if configured:
         return configured
 
-    debug_mode = os.getenv("FLASK_DEBUG", "false").lower() in {"1", "true", "yes"}
-    if debug_mode:
+    if is_debug_mode():
         return token_hex(32)
 
     raise RuntimeError("SECRET_KEY must be set in production.")
@@ -173,7 +176,7 @@ with app.app_context():
 @app.route("/healthz")
 def healthz():
     try:
-        db.session.execute(db.select(func.count(User.id))).scalar()
+        db.session.execute(db.text("SELECT 1"))
         return jsonify({"status": "ok", "time": datetime.utcnow().isoformat()}), 200
     except Exception as exc:  # pragma: no cover
         app.logger.exception("healthz failure: %s", exc)
@@ -385,7 +388,6 @@ def admin_toggle_user(user_id: int):
 
 
 if __name__ == "__main__":
-    debug_mode = os.getenv("FLASK_DEBUG", "false").lower() in {"1", "true", "yes"}
     host = os.getenv("HOST", "0.0.0.0")
     port = int(os.getenv("PORT", "5000"))
-    app.run(host=host, port=port, debug=debug_mode)
+    app.run(host=host, port=port, debug=is_debug_mode())
