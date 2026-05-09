@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+.env
+venv/
+.venv/
+.mypy_cache/
+.pytest_cache/
+
+# Build artifacts
+sibec_erp/build/
+sibec_erp/dist/

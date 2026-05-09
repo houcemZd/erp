@@ -1,32 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="/static/style.css">
-</head>
-
-<body>
-
-<div class="container">
-
+{% extends "base.html" %}
+{% block title %}Production - SIBEC ERP{% endblock %}
+{% block content %}
 <h1>Suivi Production</h1>
-
-<form method="POST">
-
-<input type="text" name="ref"
-placeholder="Référence" required>
-
-<input type="number" name="qty"
-placeholder="Quantité produite" required>
-
-<br>
-
-<button type="submit">Enregistrer</button>
-
+<form method="POST" class="card">
+  <input type="text" name="ref" placeholder="Référence" required maxlength="50">
+  <input type="number" name="qty" min="1" placeholder="Quantité produite" required>
+  <button type="submit">Enregistrer</button>
 </form>
-
-<a href="/"><button>Retour</button></a>
-
-</div>
-
-</body>
-</html>
+{% endblock %}
