@@ -93,7 +93,13 @@ td {
     width: min(500px, 90%);
     display: block;
     margin: 0 auto 20px;
-    opacity: 0.4;
+    opacity: 0.6;
+}
+
+caption {
+    caption-side: top;
+    font-weight: bold;
+    padding: 8px;
 }
 
 .flash {
