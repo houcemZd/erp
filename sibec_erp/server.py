@@ -2,6 +2,7 @@ import os
 import re
 from datetime import datetime
 from functools import wraps
+from secrets import token_hex
 
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_cors import CORS
@@ -13,7 +14,20 @@ from werkzeug.security import check_password_hash, generate_password_hash
 app = Flask(__name__)
 CORS(app)
 
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "change-me-in-production")
+
+def get_secret_key() -> str:
+    configured = os.getenv("SECRET_KEY")
+    if configured:
+        return configured
+
+    debug_mode = os.getenv("FLASK_DEBUG", "false").lower() in {"1", "true", "yes"}
+    if debug_mode:
+        return token_hex(32)
+
+    raise RuntimeError("SECRET_KEY must be set in production.")
+
+
+app.config["SECRET_KEY"] = get_secret_key()
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///sibec.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -131,7 +145,13 @@ def write_audit(action: str, details: str, actor_id: int | None = None) -> None:
 
 def bootstrap_admin() -> None:
     admin_username = os.getenv("ADMIN_USERNAME", "admin")
-    admin_password = os.getenv("ADMIN_PASSWORD", "admin123")
+    admin_password = os.getenv("ADMIN_PASSWORD")
+
+    if not admin_password:
+        debug_mode = os.getenv("FLASK_DEBUG", "false").lower() in {"1", "true", "yes"}
+        if not debug_mode:
+            raise RuntimeError("ADMIN_PASSWORD must be set in production.")
+        admin_password = token_hex(8)
 
     existing = User.query.filter_by(username=admin_username).first()
     if existing:
@@ -155,7 +175,8 @@ def healthz():
         db.session.execute(db.select(func.count(User.id))).scalar()
         return jsonify({"status": "ok", "time": datetime.utcnow().isoformat()}), 200
     except Exception as exc:  # pragma: no cover
-        return jsonify({"status": "error", "message": str(exc)}), 500
+        app.logger.exception("healthz failure: %s", exc)
+        return jsonify({"status": "error", "message": "database unavailable"}), 500
 
 
 @app.route("/login", methods=["GET", "POST"])

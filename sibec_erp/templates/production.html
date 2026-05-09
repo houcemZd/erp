@@ -3,8 +3,10 @@
 {% block content %}
 <h1>Suivi Production</h1>
 <form method="POST" class="card">
-  <input type="text" name="ref" placeholder="Référence" required maxlength="50">
-  <input type="number" name="qty" min="1" placeholder="Quantité produite" required>
+  <label for="production-ref">Référence</label>
+  <input id="production-ref" type="text" name="ref" placeholder="Référence" required maxlength="50">
+  <label for="production-qty">Quantité produite</label>
+  <input id="production-qty" type="number" name="qty" min="1" placeholder="Quantité produite" required>
   <button type="submit">Enregistrer</button>
 </form>
 {% endblock %}

@@ -3,9 +3,12 @@
 {% block content %}
 <h1>Entrée / Sortie</h1>
 <form method="POST" class="card">
-  <input type="text" name="ref" placeholder="Référence" required maxlength="50">
-  <input type="number" name="qty" min="1" placeholder="Quantité" required>
-  <select name="type">
+  <label for="movement-ref">Référence</label>
+  <input id="movement-ref" type="text" name="ref" placeholder="Référence" required maxlength="50">
+  <label for="movement-qty">Quantité</label>
+  <input id="movement-qty" type="number" name="qty" min="1" placeholder="Quantité" required>
+  <label for="movement-type">Type</label>
+  <select id="movement-type" name="type">
     <option value="ENTREE">ENTREE</option>
     <option value="SORTIE">SORTIE</option>
   </select>

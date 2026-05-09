@@ -1,5 +1,6 @@
 import json
 import os
+from urllib.parse import urlparse
 import webbrowser
 import tkinter as tk
 from tkinter import messagebox
@@ -57,8 +58,9 @@ entry.pack(pady=10)
 
 def open_erp() -> None:
     server_url = url_var.get().strip()
-    if not server_url.startswith("http://") and not server_url.startswith("https://"):
-        messagebox.showerror("URL invalide", "L'URL doit commencer par http:// ou https://")
+    parsed = urlparse(server_url)
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        messagebox.showerror("URL invalide", "URL invalide. Exemple: http://192.168.1.10:5000")
         return
     webbrowser.open(server_url)
 

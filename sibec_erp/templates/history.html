@@ -17,7 +17,7 @@
     <td>{{ m.ref }}</td>
     <td>{{ m.qty }}</td>
     <td>{{ m.type }}</td>
-    <td>{{ m.actor.username if m.actor else '-' }}</td>
+    <td>{{ m.actor.username if m.actor else 'Non renseigné' }}</td>
     <td>{{ m.date }}</td>
   </tr>
   {% endfor %}
@@ -35,7 +35,7 @@
   <tr>
     <td>{{ p.ref }}</td>
     <td>{{ p.qty }}</td>
-    <td>{{ p.actor.username if p.actor else '-' }}</td>
+    <td>{{ p.actor.username if p.actor else 'Non renseigné' }}</td>
     <td>{{ p.date }}</td>
   </tr>
   {% endfor %}
@@ -53,7 +53,7 @@
   <tr>
     <td>{{ a.action }}</td>
     <td>{{ a.details }}</td>
-    <td>{{ a.actor.username if a.actor else '-' }}</td>
+    <td>{{ a.actor.username if a.actor else 'Non renseigné' }}</td>
     <td>{{ a.created_at }}</td>
   </tr>
   {% endfor %}
